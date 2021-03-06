@@ -2,7 +2,7 @@
 // import s from './FeedbackOptions.module.css';
 import React from 'react';
 
-function FeedbackOptions(onLeaveFeedback) {
+function FeedbackOptions({ onLeaveFeedback }) {
   return (
     <ul>
       <li>
