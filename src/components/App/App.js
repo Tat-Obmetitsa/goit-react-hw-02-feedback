@@ -13,41 +13,37 @@ class App extends Component {
   };
   handleIncreament = e => {
     const { name } = e.target;
-    this.setState(prevState => ({
+    return this.setState(prevState => ({
       [name]: prevState[name] + 1,
     }));
   };
-  countTotalFeedback = () => {
-    const total = (this.state.good + this.state.bad + this.state.neutral);
-    return total;
+  totalFeedback = () => {
+    return this.state.good + this.state.bad + this.state.neutral;
   };
   positivePercentage = () => {
-    return (this.state.good / this.total) * 100;
+    return Math.round((this.state.good * 100) / this.totalFeedback());
   };
   render() {
     const { good, bad, neutral } = this.state;
+    const total = this.totalFeedback();
     return (
       <>
-        <Section title="Please leave feedback">
-          <FeedbackOptions
-            options={this.state}
-            onLeaveFeedback={this.handleIncrement}
-          />
+        <Section title="Pleaseleave feeedback">
+          <FeedbackOptions onLeaveFeedback={this.handleIncreament} />
         </Section>
-
-        <Section title="Statistics">
-          {this.total >= 0 ? (
+        {total === 0 ? (
+          <Notification message="No feedback given" />
+        ) : (
+          <Section>
             <Statistics
               good={good}
               neutral={neutral}
               bad={bad}
-              total={this.total}
-              positiveFb={this.positivePercentage}
+              total={total}
+              positiveFb={this.positivePercentage()}
             />
-          ) : (
-            <Notification message="No feedback given" />
-          )}
-        </Section>
+          </Section>
+        )}
       </>
     );
   }
