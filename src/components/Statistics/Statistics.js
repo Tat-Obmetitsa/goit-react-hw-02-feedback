@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import s from '../Statistics/Statistics.module.css';
 const Statistics = ({ good, bad, neutral, total, positiveFb }) => {
   return (
     <>
-      <ul>
-        <li>Good: {good}</li>
-        <li>Neutral: {neutral}</li>
-        <li>Bad: {bad}</li>
-        <li>Total: {total}</li>
-        <li>Positive feedback: {positiveFb}%</li>
+      <ul className={s.container__stats}>
+        <li className={s.container__stats_title}>Good: {good}</li>
+        <li className={s.container__stats_title}>Neutral: {neutral}</li>
+        <li className={s.container__stats_title}>Bad: {bad}</li>
+        <li className={s.container__stats_title}>Total: {total}</li>
+        <li className={s.container__stats_title}>
+          Positive feedback: {positiveFb}%
+        </li>
       </ul>
     </>
   );
